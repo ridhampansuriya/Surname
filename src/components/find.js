@@ -4,34 +4,76 @@ import suranmaes from "../surnames"
 
 
 const Find = () => {
-    const [lastname, setLastname] = useState();
+    const [lastname, setLastname] = useState('');
     const [searchTerm, setsearchTerm] = useState('')
-    // const surname = suranmaes;
-    console.log(suranmaes);
-    const onChange = (e) => {
-        console.log("onchange function called")
+    let [AB,setAB]= useState([])
+    let [CD,setCD]= useState('');
 
-        let {value} = e.target;
-        console.log("onchange function value called befaore",value);
+    const onChange = (e) => {
+         let {value} = e.target;
         value = value.replace(/[0-9]/g,"");
         value = value.replace(/[&\/\\#\-,+()$`|~%.;=[\]!@^_'":*?<>{}]/g, '');
-        console.log("onchange function called after value",value);
-        // setLastname(value);
         setsearchTerm(value);
     };
+    console.log("hiii..")
+
+    const onChangeXY =(event)=>{
+
+        let {value} = event.target;
+        var var2 = value.slice(-1);
+        console.log("var2 in up",var2)
+         let var3 = CD;
+        console.log("var3 in up",var3)
+        // setCD(var3);
+        switch (var2) {
+               case  'x':
+                   var2 = var2.replace(/[xX]/g, 'y');
+                            var3= var3 + var2;
+                            // setCD(var3);
+                            break;
+                    case  'y':
+                        var2 = var2.replace(/[yY]/g, 'x');
+                        var3= var3 + var2;
+                        // setCD(var3);
+                        break;
+                    default:
+                        console.log("defult case");
+                        var3= var3 + var2;
+                        console.log("var3",var3);
+                        setCD(var3);
+                        // console.log("CD",CD)
+                        // return AB;
+                        break;
+                }
+        setCD(var3);
+        console.log("CD",CD)
+        setLastname(var3);
+        console.log("lastname",lastname)
+    }
     useEffect(()=>{
         // setsearchTerm(suranmaes);
     });
     return (
         <div>
             <input type="text"
-                   style={{width: '100%'}}
+                   style={{width: 'auto'}}
                    className="inputbar"
                    placeholder="Search.."
                    onChange={onChange}
                    title="Type in a category"
                    value={searchTerm}
             />
+            {/*<input type="text"*/}
+            {/*       style={{width: 'auto'}}*/}
+            {/*       className="inputbar"*/}
+            {/*       id="input-2"*/}
+            {/*       placeholder="Search.."*/}
+            {/*       onChange={onChangeXY}*/}
+            {/*       // onKeyDown={onChangeXY}*/}
+            {/*       title="Type in a category"*/}
+            {/*       value={lastname}*/}
+            {/*/>*/}
+
             <div>
                 {suranmaes.filter((item) => {
                     if (searchTerm === "") {
